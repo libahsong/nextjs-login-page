@@ -42,7 +42,7 @@ export default function Input({
         />
       </div>
       {errors.map((error, index) => (
-        <span key={index} className="text-red-500 font-medium">
+        <span key={index} className="text-red-500 font-light text-base">
           {error}
         </span>
       ))}
