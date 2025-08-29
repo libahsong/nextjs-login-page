@@ -21,44 +21,28 @@ export default function Login() {
             placeholder="Email"
             name="email"
             required={true}
-            errors={
-              state?.errors?.errorName === "email" ? state?.errors.messages : []
-            }
-            errorStatus={state?.errors?.errorStatus ?? false}
-            errorName={state?.errors?.errorName ?? ""}
+            errors={state?.errors?.email}
           />
           <Input
             type={"text"}
             placeholder={"Username"}
             name={"username"}
             required={true}
-            errors={
-              state?.errors?.errorName === "username"
-                ? state?.errors.messages
-                : []
-            }
-            errorStatus={state?.errors?.errorStatus ?? false}
-            errorName={state?.errors?.errorName ?? ""}
+            errors={state?.errors?.username}
           />
           <Input
             type={"password"}
             placeholder={"Password"}
             name={"password"}
             required={true}
-            errors={
-              state?.errors?.errorName === "password"
-                ? state?.errors.messages
-                : []
-            }
-            errorStatus={state?.errors?.errorStatus ?? false}
-            errorName={state?.errors?.errorName ?? ""}
+            errors={state?.errors?.password}
           />
           <Button text={"Login"} />
         </form>
         {state?.success ? (
           <div className="w-full bg-green-600 py-3 rounded-lg text-lg flex items-center justify-center gap-2">
             <CheckCircleIcon className="size-6" />
-            <span>{state?.success}</span>
+            <span>Welcome!</span>
           </div>
         ) : null}
       </div>

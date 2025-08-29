@@ -7,9 +7,7 @@ interface InputProps {
   placeholder: string;
   name: string;
   required: boolean;
-  errors: string[];
-  errorStatus: boolean;
-  errorName: string;
+  errors?: string[];
 }
 
 export default function Input({
@@ -17,9 +15,7 @@ export default function Input({
   placeholder,
   name,
   required,
-  errors,
-  errorStatus,
-  errorName,
+  errors = [],
 }: InputProps) {
   console.log(errors);
 
@@ -35,7 +31,7 @@ export default function Input({
         )}
         <input
           className={`py-4 pl-12 rounded-full w-full ring outline-transparent focus:ring-offset-2 ${
-            errorStatus && name === errorName
+            errors.length !== 0
               ? "ring-red-400 focus:outline-red-400"
               : "ring-gray-300 focus:outline-gray-300"
           }`}
