@@ -6,6 +6,7 @@ async function getTweet(id: number) {
     where: { id },
     include: { users: true },
   });
+
   return tweet;
 }
 
