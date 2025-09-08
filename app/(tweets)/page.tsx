@@ -5,7 +5,7 @@ import { Prisma } from "@prisma/client";
 
 async function getInitialTweets() {
   const initialTweets = await db.tweet.findMany({
-    include: { users: true },
+    include: { user: true },
     take: 10,
     orderBy: { created_at: "desc" },
   });

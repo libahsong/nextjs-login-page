@@ -45,7 +45,7 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
           id={tweet.id}
           tweet={tweet.tweet}
           created_at={tweet.created_at}
-          username={tweet.users.username}
+          username={tweet.user.username}
         />
       ))}
       <div className="w-full flex justify-between p-10">

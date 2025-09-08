@@ -7,7 +7,7 @@ import z from "zod";
 
 export async function getMoreTweets(page: number) {
   const tweets = await db.tweet.findMany({
-    include: { users: true },
+    include: { user: true },
     skip: page * 10,
     take: 10,
     orderBy: {
@@ -39,7 +39,7 @@ export async function uploadTweet(_: any, formData: FormData) {
       const tweet = await db.tweet.create({
         data: {
           tweet: result.data.tweet,
-          userId: session.id,
+          user: { connect: { id: session.id } },
         },
         select: { id: true },
       });

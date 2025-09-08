@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 async function getTweet(id: number) {
   const tweet = await db.tweet.findUnique({
     where: { id },
-    include: { users: true },
+    include: { user: true },
   });
 
   return tweet;
@@ -24,7 +24,7 @@ export default async function Tweet({ params }: { params: { id: string } }) {
         <span>{tweet?.tweet}</span>
         <div>
           <span>user : </span>
-          <span className="">{tweet?.users.username}</span>
+          <span className="">{tweet?.user.username}</span>
         </div>
         <span>
           {tweet?.created_at.toLocaleString("ko-KR", { timeZone: "UTC" })}
