@@ -11,7 +11,7 @@ export default function Button({ text }: ButtonProps) {
   return (
     <button
       disabled={pending}
-      className="bg-lime-200 rounded-full py-4 text-lg font-medium hover:bg-lime-400 disabled:bg-neutral-400 disabled:text-neutral-300 disabled:cursor-not-allowed"
+      className="w-full bg-lime-200 rounded-full py-4 text-lg font-medium hover:bg-lime-400 disabled:bg-neutral-400 disabled:text-neutral-300 disabled:cursor-not-allowed"
     >
       {pending ? "Loading..." : text}
     </button>

@@ -6,7 +6,7 @@ export default async function Header() {
   return (
     <>
       {session.id ? (
-        <div className="absolute flex gap-5 right-20 text-lg p-10">
+        <div className="w-full border-b flex justify-end bg-yellow-50 gap-5 text-lg p-7">
           <Link href="/">Home</Link>
           <Link href="/profile">Profile</Link>
         </div>

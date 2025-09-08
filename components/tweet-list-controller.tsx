@@ -38,27 +38,24 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
     }
   };
   return (
-    <div className="w-full h-screen bg-yellow-50 flex justify-center items-center">
-      <div className="flex flex-col gap-6 justify-center items-center w-1/4">
-        {/* {initialTweets.map((tweet) => ( */}
-        {tweets.map((tweet) => (
-          <TweetList
-            key={tweet.id}
-            id={tweet.id}
-            tweet={tweet.tweet}
-            created_at={tweet.created_at}
-            username={tweet.users.username}
-          />
-        ))}
-        <div className="w-1/4 absolute bottom-0 flex justify-between p-20">
-          <button onClick={onLoadPrevClick}>
-            <ArrowLeftCircleIcon className="size-10" />
-          </button>
-          <span>{page + 1}</span>
-          <button onClick={onLoadMoreClick}>
-            <ArrowRightCircleIcon className="size-10" />
-          </button>
-        </div>
+    <div className="flex flex-col gap-6 justify-center items-center w-1/4">
+      {tweets.map((tweet) => (
+        <TweetList
+          key={tweet.id}
+          id={tweet.id}
+          tweet={tweet.tweet}
+          created_at={tweet.created_at}
+          username={tweet.users.username}
+        />
+      ))}
+      <div className="w-full flex justify-between p-10">
+        <button onClick={onLoadPrevClick}>
+          <ArrowLeftCircleIcon className="size-10" />
+        </button>
+        <span>{page + 1}</span>
+        <button onClick={onLoadMoreClick}>
+          <ArrowRightCircleIcon className="size-10" />
+        </button>
       </div>
     </div>
   );

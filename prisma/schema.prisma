@@ -20,7 +20,7 @@ model User {
   username   String   @unique
   password   String
   email      String   @unique
-  bio        String
+  bio        String?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   tweets     Tweet[]
@@ -33,7 +33,7 @@ model Tweet {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   userId     Int
-  User       User     @relation(fields: [userId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
   likes      Like[]
 }
 
@@ -43,8 +43,8 @@ model Like {
   userId      Int
   tweetId     Int
 
-  User  User  @relation(fields: [userId], references: [id])
-  Tweet Tweet @relation(fields: [tweetId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+  tweet Tweet @relation(fields: [tweetId], references: [id])
 
   @@id(name: "id", [userId, tweetId])
 }
