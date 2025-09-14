@@ -2,50 +2,21 @@
 
 import { InitialTweets } from "@/app/(tweets)/page";
 import TweetList from "./tweet-list";
-import {
-  ArrowLeftCircleIcon,
-  ArrowRightCircleIcon,
-} from "@heroicons/react/24/solid";
 import { useEffect, useRef, useState } from "react";
 import { getCachedMoreTweets, getMoreTweets } from "@/app/(tweets)/action";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import getSession from "@/lib/session";
-import { getCachedLikeStatus } from "@/app/tweets/[id]/page";
 
 interface InitialTweetsProps {
   initialTweets: InitialTweets;
 }
 
 export default function ListController({ initialTweets }: InitialTweetsProps) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [tweets, setTweets] = useState(initialTweets);
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);
   // const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
-  const onLoadMoreClick = async () => {
-    // const newTweets = await getMoreTweets(page + 1);
-    const newTweets = await getCachedMoreTweets(page + 1);
-    if (newTweets.length !== 0) {
-      setPage((prev) => prev + 1);
-      // setTweets((prev) => [...prev, ...newTweets]);
-      setTweets(newTweets);
-    } else {
-      setIsLastPage(true);
-    }
-  };
-  const onLoadPrevClick = async () => {
-    if (page === 0) {
-      setIsLastPage(true);
-      return;
-    } else {
-      const newTweets = await getMoreTweets(page - 1);
-      setPage((prev) => prev - 1);
-      setTweets(newTweets);
-    }
-  };
   const trigger = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -59,8 +30,6 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
           observer.unobserve(trigger.current);
           setIsLoading(true);
           router.push(`/?page=${page + 1}`, { scroll: false });
-          // router.push(`/?page=${page + 1}`);
-
           const newTweets = await getMoreTweets(page + 1);
           // const newTweets = await getCachedMoreTweets(page + 1);
           if (newTweets.length !== 0) {
@@ -101,7 +70,6 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
       window.removeEventListener("scroll", savePosition);
     };
   }, []);
-  // }, [page]);
 
   return (
     <div className="flex flex-col gap-16 justify-center items-center w-1/4">

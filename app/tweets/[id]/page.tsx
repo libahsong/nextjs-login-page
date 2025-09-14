@@ -71,7 +71,7 @@ async function getLikeStatus(tweetId: number, userId: number) {
   return { likeCount, isLiked: Boolean(isLiked) };
 }
 
-export function getCachedLikeStatus(tweetId: number, userId: number) {
+function getCachedLikeStatus(tweetId: number, userId: number) {
   const cachedOperation = nextCache(getLikeStatus, ["tweet-like-status"], {
     tags: [`like-status-${tweetId}`],
   });
