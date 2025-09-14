@@ -19,7 +19,7 @@ export default async function Nav() {
           </div>
         ) : (
           <div className="flex flex-col gap-7 p-8 px-11">
-            <Link href={"/login"}>Login</Link>
+            <Link href={"/login"}>Login Or Create Account</Link>
           </div>
         )}
       </div>
