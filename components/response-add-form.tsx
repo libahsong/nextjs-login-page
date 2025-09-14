@@ -47,8 +47,8 @@ export function AddResponse({
   };
 
   return (
-    <div className="flex flex-col gap-10 border-b w-full">
-      <div className="flex items-center gap-5 w-full">
+    <div className="flex flex-col gap-10 w-full">
+      <div className="flex items-center gap-5 w-full border-b pb-5">
         <UserCircleIcon className="size-10" />
         <form ref={ref} action={handleForm} className="flex gap-5">
           <Input

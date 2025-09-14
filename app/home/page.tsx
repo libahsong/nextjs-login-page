@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="w-full h-screen bg-yellow-50 flex justify-center items-center">
+    <div className="w-full h-screen flex justify-center items-center">
       <div className="flex flex-col gap-6 justify-center items-center w-1/4">
         <div className="flex flex-col items-center gap-7">
           <LightBulbIcon className="size-20 text-yellow-400" />

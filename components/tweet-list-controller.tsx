@@ -104,7 +104,7 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
   // }, [page]);
 
   return (
-    <div className="flex flex-col gap-6 justify-center items-center w-1/4">
+    <div className="flex flex-col gap-16 justify-center items-center w-1/4">
       {tweets.map((tweet) => (
         <TweetList
           key={tweet.id}

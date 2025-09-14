@@ -114,7 +114,7 @@ export default async function Tweet({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
-        <div className="flex gap-2 items-center w-full">
+        <div className="flex gap-2 items-center w-full border-b border-t p-3">
           <div className="flex gap-1 items-center">
             <ChatBubbleBottomCenterIcon className="size-5" />
             {/* <span>{tweet._count.responses}</span> */}

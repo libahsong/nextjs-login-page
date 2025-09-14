@@ -39,7 +39,7 @@ export default function TweetList({
   );
 
   return (
-    <div key={id} className="flex flex-col gap-10 border-b p-3 w-full">
+    <div key={id} className="flex flex-col gap-10 w-full">
       <div className="flex">
         <UserCircleIcon className="size-10" />
         <div className="flex gap-1 items-start">
@@ -57,7 +57,7 @@ export default function TweetList({
       >
         <span>{tweet}</span>
       </Link>
-      <div className="flex gap-3 items-center w-full">
+      <div className="flex gap-3 items-center w-full border-b border-t p-3">
         <div className="flex gap-1 items-center">
           <ChatBubbleBottomCenterIcon className="size-5" />
           <span className="text-sm">{counts}</span>
@@ -68,7 +68,10 @@ export default function TweetList({
         </div>
         {/* <LikeButton isLiked={isLiked} likeCount={likeCounts} tweetId={id} /> */}
         <div className="flex gap-1">
-          <button className="flex items-center text-gray-500 hover:text-red-700">
+          <button
+            disabled={true}
+            className="flex items-center text-gray-500 hover:text-red-700"
+          >
             {isLiked ? (
               <HeartIcon className="size-5 text-red-700" />
             ) : (
