@@ -13,7 +13,7 @@ export default function AddTweet() {
         className="w-full flex flex-col gap-5 justify-center items-center p-5"
       >
         <input
-          placeholder="Write your tweet"
+          placeholder="Share your story"
           name="tweet"
           type="text"
           className="py-4 pl-12 rounded-full w-full ring outline-transparent focus:ring-offset-2 ring-gray-300 focus:outline-gray-300"

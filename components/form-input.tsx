@@ -26,11 +26,13 @@ export default function Input({
           <EnvelopeIcon className="absolute size-5 ml-5 text-gray-500" />
         ) : name === "username" ? (
           <UserIcon className="absolute size-5 ml-5 text-gray-500" />
-        ) : (
+        ) : name === "password" ? (
           <KeyIcon className="absolute size-5 ml-5 text-gray-500" />
-        )}
+        ) : null}
         <input
-          className={`py-4 pl-12 rounded-full w-full ring outline-transparent focus:ring-offset-2 ${
+          className={`${
+            name === "response" ? "py-4 text-center" : "py-4 pl-12"
+          } rounded-full w-full ring outline-transparent focus:ring-offset-2 ${
             errors.length !== 0
               ? "ring-red-400 focus:outline-red-400"
               : "ring-gray-300 focus:outline-gray-300"

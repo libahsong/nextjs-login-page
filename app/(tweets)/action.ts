@@ -2,19 +2,34 @@
 
 import db from "@/lib/db";
 import getSession from "@/lib/session";
+import { unstable_cache as nextCache, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import z from "zod";
 
 export async function getMoreTweets(page: number) {
   const tweets = await db.tweet.findMany({
-    include: { user: true },
+    // include: { user: true, _count: { select: { responses: true } } },
+    include: {
+      user: { select: { username: true, id: true } },
+      _count: { select: { responses: true, likes: true } },
+      likes: true,
+    },
     skip: page * 10,
     take: 10,
     orderBy: {
       created_at: "desc",
     },
   });
+  console.log(tweets);
+
   return tweets;
+}
+
+export async function getCachedMoreTweets(page: number) {
+  const operationCache = nextCache(getMoreTweets, ["getMoreTweets"], {
+    tags: ["moreTweets"],
+  });
+  return operationCache(page);
 }
 
 const tweetSchema = z.object({
@@ -43,6 +58,7 @@ export async function uploadTweet(_: any, formData: FormData) {
         },
         select: { id: true },
       });
+      revalidateTag("call-initialTweets");
       redirect(`/tweets/${tweet.id}`);
     }
   }
