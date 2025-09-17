@@ -1,6 +1,6 @@
 export function formatDate(dateString: string) {
   const formatedDate = new Intl.DateTimeFormat("ko-KR", {
-    timeZone: "UTC",
+    timeZone: "Asia/Seoul",
     hour12: true,
     // weekday: "long",
     year: "numeric",
