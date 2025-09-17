@@ -2,6 +2,7 @@
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 import z from "zod";
 
 const responseSchema = z.object({
@@ -64,4 +65,11 @@ export async function dislikeTweet(tweetId: number) {
 
 export async function customRevalidateTag(text: string) {
   return revalidateTag(text);
+}
+
+export async function deleteTweet(tweetId: number) {
+  await db.tweet.delete({ where: { id: tweetId } });
+  revalidateTag("call-initialTweets");
+  revalidateTag("moreTweets");
+  redirect("/");
 }

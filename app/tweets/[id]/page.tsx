@@ -14,6 +14,8 @@ import getSession from "@/lib/session";
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
 import { formatDate } from "@/lib/utils";
 import Button from "@/components/form-btn";
+import { deleteTweet } from "./action";
+import { DeleteBtn } from "@/components/delete-button";
 
 async function getTweet(id: number) {
   const tweet = await db.tweet.update({
@@ -89,6 +91,7 @@ export default async function Tweet({ params }: { params: { id: string } }) {
   }
   const session = await getSession();
   const tweet = await getCachedTweet(id);
+
   // const tweet = await getTweet(id);
 
   const responses = await getCachedResponses(id);
@@ -123,13 +126,15 @@ export default async function Tweet({ params }: { params: { id: string } }) {
           </div>
           <LikeButton isLiked={isLiked} likeCount={likeCount} tweetId={id} />
         </div>
-        <div className="flex gap-5 justify-end">
-          <div className="">
-            <Button text="Edit" />
-          </div>
-          <div className="">
-            <Button text="Delete" />
-          </div>
+        <div className="flex justify-end w-full">
+          {session.id === tweet.user.id ? (
+            <div className="flex gap-5">
+              <button className="w-full bg-blue-200 px-2 rounded-full text-lg font-medium hover:bg-blue-400 disabled:bg-neutral-400 disabled:text-neutral-300 disabled:cursor-not-allowed">
+                Edit
+              </button>
+              <DeleteBtn tweetId={id} />
+            </div>
+          ) : null}
         </div>
         <AddResponse
           tweetId={id}
