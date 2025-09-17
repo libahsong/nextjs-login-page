@@ -12,14 +12,19 @@ interface InitialTweetsProps {
 
 export default function ListController({ initialTweets }: InitialTweetsProps) {
   const [tweets, setTweets] = useState(initialTweets);
-  const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);
   // const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
   const trigger = useRef<HTMLSpanElement>(null);
+  const params = useSearchParams();
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
+    const initialPage = Number(params.get("page"));
+    console.log("page", page, "params", initialPage);
+    console.log("tweets", tweets);
+
     const observer = new IntersectionObserver(
       async (
         entries: IntersectionObserverEntry[],
@@ -30,8 +35,8 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
           observer.unobserve(trigger.current);
           setIsLoading(true);
           router.push(`/?page=${page + 1}`, { scroll: false });
-          const newTweets = await getMoreTweets(page + 1);
-          // const newTweets = await getCachedMoreTweets(page + 1);
+          // const newTweets = await getMoreTweets(page + 1);
+          const newTweets = await getCachedMoreTweets(page + 1);
           if (newTweets.length !== 0) {
             setPage((prev) => prev + 1);
             setTweets((prev) => [...prev, ...newTweets]);
@@ -53,8 +58,16 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
   // }, []);
 
   useEffect(() => {
+    console.log("scroll useEffect start", sessionStorage.getItem("scrollY"));
+
     function savePosition() {
-      const restorePosition = sessionStorage.getItem("scrollY");
+      const restorePosition = sessionStorage.getItem("scrollY") || "{}";
+      if (sessionStorage.getItem("scrollY")) {
+        sessionStorage.setItem(
+          "scrollY",
+          JSON.stringify(sessionStorage.getItem("scrollY"))
+        );
+      }
       if (restorePosition) {
         sessionStorage.setItem("scrollY", window.scrollY.toString());
       }
@@ -65,9 +78,9 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
       console.log("restorePosition first arrived", Number(restorePosition));
       window.scrollTo(0, Number(restorePosition));
     }
-    window.addEventListener("scroll", savePosition);
+    window.addEventListener("scrollend", savePosition);
     return () => {
-      window.removeEventListener("scroll", savePosition);
+      window.removeEventListener("scrollend", savePosition);
     };
   }, []);
 

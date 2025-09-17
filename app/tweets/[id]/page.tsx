@@ -13,6 +13,7 @@ import { LikeButton } from "@/components/like-button";
 import getSession from "@/lib/session";
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
 import { formatDate } from "@/lib/utils";
+import Button from "@/components/form-btn";
 
 async function getTweet(id: number) {
   const tweet = await db.tweet.update({
@@ -121,6 +122,14 @@ export default async function Tweet({ params }: { params: { id: string } }) {
             <span>{responsesCount}</span>
           </div>
           <LikeButton isLiked={isLiked} likeCount={likeCount} tweetId={id} />
+        </div>
+        <div className="flex gap-5 justify-end">
+          <div className="">
+            <Button text="Edit" />
+          </div>
+          <div className="">
+            <Button text="Delete" />
+          </div>
         </div>
         <AddResponse
           tweetId={id}

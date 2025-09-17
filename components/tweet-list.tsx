@@ -5,6 +5,7 @@ import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
 import { customRevalidateTag } from "@/app/tweets/[id]/action";
 import { HeartIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartIconOutline } from "@heroicons/react/24/outline";
+import Button from "./form-btn";
 
 interface TweetListProps {
   id: number;
@@ -40,14 +41,16 @@ export default function TweetList({
 
   return (
     <div key={id} className="flex flex-col gap-10 w-full">
-      <div className="flex">
+      <div className="flex gap-2">
         <UserCircleIcon className="size-10" />
         <div className="flex gap-1 items-start">
-          <span>{username}</span>
-          <span>&middot;</span>
-          <span className="text-gray-600 text-sm">
-            {formatDate(created_at.toString())}
-          </span>
+          <div className="flex items-center gap-1">
+            <span>{username}</span>
+            <span>&middot;</span>
+            <span className="text-gray-600 text-sm ">
+              {formatDate(created_at.toString())}
+            </span>
+          </div>
         </div>
       </div>
       <Link
