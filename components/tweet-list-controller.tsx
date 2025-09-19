@@ -55,7 +55,6 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
       observer.disconnect();
     };
   }, [page]);
-  // }, []);
 
   useEffect(() => {
     console.log("scroll useEffect start", sessionStorage.getItem("scrollY"));
@@ -74,9 +73,7 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
     }
     const restorePosition = sessionStorage.getItem("scrollY");
     if (restorePosition) {
-      console.log("restorePosition first arrived", restorePosition);
-      console.log("restorePosition first arrived", Number(restorePosition));
-      window.scrollTo(0, Number(restorePosition));
+      window.scrollTo({ top: Number(restorePosition), behavior: "smooth" });
     }
     window.addEventListener("scrollend", savePosition);
     return () => {
@@ -85,7 +82,7 @@ export default function ListController({ initialTweets }: InitialTweetsProps) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-16 justify-center items-center w-1/4">
+    <div className="flex flex-col gap-16 justify-center items-center w-1/4 pb-12">
       {tweets.map((tweet) => (
         <TweetList
           key={tweet.id}
